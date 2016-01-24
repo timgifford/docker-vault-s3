@@ -1,7 +1,7 @@
 FROM alpine:3.3
 
-COPY vault /usr/sbin/vault
-COPY s3.hcl /usr/sbin/
+COPY vault /usr/bin/vault
+COPY s3.hcl /usr/bin/
 
 # S3 connects via https, so we need the ca-certificates. 
 RUN apk update && \
@@ -15,4 +15,4 @@ EXPOSE 8200
 # AWS_ACCESS_KEY_ID
 # AWS_SECRET_ACCESS_KEY 
 
-ENTRYPOINT ["vault","server","-config=/usr/sbin/s3.hcl"]
+ENTRYPOINT ["vault","server","-config=/usr/bin/s3.hcl"]
