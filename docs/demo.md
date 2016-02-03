@@ -1,11 +1,11 @@
-Setup
+#Setup
 
-Tell Vault about the server
+##Tell Vault about the server
 ```
 export VAULT_ADDR=http://$(docker-machine ip default):8200
 ```
 
-Initialize the vault
+##Initialize the vault
 
 This setting creates 3 keys. The threshold is the number of keys needed to unseal the vault.
 
@@ -13,24 +13,32 @@ This setting creates 3 keys. The threshold is the number of keys needed to unsea
 vault init -key-shares=3 -key-threshold=2
 ```    
 
-Un-seal the vault
+##Un-seal the vault
 ```
 vault unseal
 ```
 
-Seal the vault
+#Authenticate
+Todo
 
-Authenticate
+#Transit
 
-Transit
+## Mount the transit feature
 ```
-vault mount transit
+$ vault mount transit
+```
 
-vault path-help transit
-
+## See some help about transit
+```
+$ vault path-help transit
+```
+## Create a new key
+```
 vault write -f transit/keys/timgifford
 ```
 
+## Encrypt some data with the key
+Values need to be base64 encoded
 ```
 $ echo -n "this is my password" | base64 | vault write transit/encrypt/timgifford plaintext=-
 Key       	Value
@@ -45,9 +53,7 @@ Key       	Value
 ciphertext	vault:v1:RgQHAsga/Fv5zjuW5zXIQLSQsLXTKB8/PjHw6/50qPlH5M9ZGu0OGLYauZJbCVk=
 ```
 
-
-
-Datakey
+#Datakey
 
 Get a local key to encrypt/decrypt large files locally. You can encrypt using the plaintext and store the ciphertext with the data.
 ```
@@ -65,13 +71,14 @@ Key      	Value
 plaintext	BzudlVJ96/aU6g2BRqTGOS5mNYK7WmUHfnVY0tqGxJg=
 ```
 
-Write Data
+#Write Data
 
+##Write from command line
 ```
 $ vault write secret/a value="aaaaa"
 ```
 
-Write a file
+##Write a file
 ```
 $ cat data.json
 { "value": "itsasecret" }
@@ -79,9 +86,12 @@ $ cat data.json
 $ vault write secret/password @data.json
 ```
 
-Read Data
-
+#Read Data
 ```
 $ vault read -field value secret/a
+aaaaa
 ```
+
+#Seal the vault
+Todo
 
