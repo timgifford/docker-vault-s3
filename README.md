@@ -12,7 +12,7 @@ You need to create a file named `env.list` and put the following values in it:
  AWS_SECRET_ACCESS_KEY=aws-secret-access-key
  ```
  
- 1. Make sure Docker is configured and running by running `docker status`
+ 1. Make sure Docker is configured and running by running `docker version`
 
  You should see output like this:
  ```
@@ -41,3 +41,6 @@ This will:
  1. Download HashiCorp's Vault binary. Currently hardcoded to support my MacBook Pro.
  1. Build the Docker image
  1. Run the Docker image
+
+### Demo
+Checkout some samples in the [docs](docs/demo.md) folder.
